@@ -183,7 +183,23 @@ Ini nama label SSH key-nya di GitHub. Biarkan default, tekan Enter.
 ```
 Pilih `Login with a web browser`.
 
-Terminal akan menampilkan **kode 8 karakter**. Buka browser, masuk ke **github.com/login/device**, masukkan kodenya, klik Authorize. Balik ke terminal — sudah authenticated.
+Terminal akan menampilkan **kode 8 karakter**:
+
+```
+! First copy your one-time code: E234-28DC
+Press Enter to open github.com in your browser...
+```
+
+Tekan Enter, browser otomatis terbuka ke **github.com/login/device**. Masukkan kodenya, klik Authorize. Balik ke terminal — kalau sukses muncul:
+
+```
+✓ Authentication complete.
+✓ Configured git protocol
+✓ SSH key already existed on your GitHub account: /home/hendri/.ssh/id_ed25519.pub
+✓ Logged in as usernamekamu
+```
+
+Sudah authenticated dan siap dipakai.
 
 ---
 
@@ -198,6 +214,21 @@ gh repo create nama-repo --public --source=. --push
 
 Satu perintah `gh repo create` — repo otomatis terbuat di GitHub dan langsung ter-push.
 
+> ⚠️ **Jangan sampai kebalik urutannya!**
+> `gh repo create --push` butuh minimal satu commit. Kalau dipanggil sebelum `git commit`, akan error:
+> ```
+> `--push` enabled but no commits found
+> ```
+> Selalu pastikan sudah `git commit` dulu sebelum `gh repo create`.
+
+> ⚠️ **`gh auth login` harus dilakukan di tiap komputer baru**
+> Sama seperti `git config --global`, login `gh` tidak otomatis tersync ke komputer lain. Kalau lupa login dan langsung jalankan `gh repo create`, akan muncul:
+> ```
+> HTTP 401: Requires authentication
+> Try authenticating with:  gh auth login
+> ```
+> Solusinya jalankan `gh auth login` dulu, baru ulangi perintah `gh repo create`.
+
 **Contoh nyata** — kamu punya folder `esp32-sensor-suhu`:
 
 ```bash
@@ -208,7 +239,16 @@ git commit -m "first commit"
 gh repo create esp32-sensor-suhu --public --source=. --push
 ```
 
-Selesai. Repo sudah online di `github.com/usernamekamu/esp32-sensor-suhu`.
+Kalau sukses, output-nya seperti ini:
+
+```
+✓ Created repository usernamekamu/esp32-sensor-suhu on GitHub
+  https://github.com/usernamekamu/esp32-sensor-suhu
+✓ Added remote git@github.com:usernamekamu/esp32-sensor-suhu.git
+✓ Pushed commits to git@github.com:usernamekamu/esp32-sensor-suhu.git
+```
+
+Repo sudah online dan tidak perlu `git push` lagi — sudah ter-push sekaligus.
 
 ---
 
