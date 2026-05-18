@@ -387,21 +387,33 @@ Cek dulu:
 cat ~/.gitconfig
 ```
 
-Pastikan ada bagian `[user]` dengan email dan nama yang benar. Kalau tidak ada atau salah, ulangi perintah config di atas.
+Ini contoh output yang bikin bingung — sekilas terlihat sudah benar, tapi ternyata ada yang kurang:
 
----
+```
+hendri@my-pi5-athome:~ $ cat ~/.gitconfig
+[user]
+    email = hendrieepis@gmail.com
+    name = Hendri
+hendri@my-pi5-athome:~ $
+```
 
-### ⚠️ Warning: "hint: Using 'master' as the name for the initial branch"
+Nah ketahuan — `user.email` dan `user.name` sudah ada, tapi `init.defaultBranch` belum. Jadi warning branch name itu akan terus muncul tiap `git init` buat repo baru. Padahal sudah merasa setup-nya beres. Frustrasi kan?
 
-**Penyebab:** `init.defaultBranch` belum di-set.
-
-**Solusi (sekali saja):**
+Fix-nya tambahkan satu baris ini:
 
 ```bash
 git config --global init.defaultBranch main
 ```
 
-Setelah itu cek lagi `cat ~/.gitconfig` — harusnya sekarang ada bagian `[init]` dengan `defaultBranch = main`. Warning tidak akan muncul lagi di repo manapun.
+Cek lagi sampai hasilnya seperti ini — baru beres permanent:
+
+```
+[user]
+    email = hendrieepis@gmail.com
+    name = Hendri
+[init]
+    defaultBranch = main
+```
 
 ---
 
