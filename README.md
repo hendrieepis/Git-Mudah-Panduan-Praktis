@@ -116,9 +116,27 @@ Setelah ini, setiap push tidak akan minta password lagi.
 
 ## 3. Buat Repo Baru — Dari VSCode sampai Nemu `gh`
 
-### Awalnya pakai VSCode
+### Awalnya: cara resmi dari GitHub
 
-Waktu pertama kali mau push repo baru ke GitHub, cara yang paling umum ditemukan adalah lewat browser — buka github.com, klik "New repository", isi nama, copy URL, baru jalankan `git remote add origin`. Ribet, tapi ya itulah caranya yang paling banyak diajarkan.
+Waktu pertama kali mau push repo baru, GitHub sendiri yang kasih instruksi ini:
+
+```bash
+echo "# nama-repo" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:usernamekamu/nama-repo.git
+git push -u origin main
+```
+
+Tapi sebelum bisa jalankan itu semua, kamu harus buka browser dulu — login GitHub, klik "New repository", isi nama repo, klik Create, copy SSH URL-nya, balik ke terminal, paste ke `git remote add origin`. Baru deh jalankan perintah di atas.
+
+Ribet? Iya. Tapi ya itulah cara "resminya" — dan hampir semua tutorial di internet masih mengajarkan cara ini sampai sekarang.
+
+---
+
+### Ketemu jalan pintas pertama: VSCode
 
 Sampai ketemu solusi yang lebih praktis: **VSCode**. Setelah `git init`, `git add .`, `git commit`, tinggal jalankan:
 
@@ -435,6 +453,20 @@ git push origin main
 ---
 
 ## 6. Referensi Cepat
+
+### Bacaan Wajib — Git Cheat Sheet
+
+Tidak perlu hafal semua perintah git. Simpan salah satu (atau ketiganya) ini di browser kamu:
+
+| Sumber | Link | Kelebihan |
+|--------|------|-----------|
+| **GitHub** (official) | https://education.github.com/git-cheat-sheet-education.pdf | Satu halaman, bisa diprint, paling banyak dipakai di kampus |
+| **Atlassian** | https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet | Paling lengkap, ada penjelasan konteks tiap perintah |
+| **GitLab** | https://about.gitlab.com/images/press/git-cheat-sheet.pdf | Layout bersih, berwarna, enak dibaca |
+
+> Rekomendasi: print yang **GitHub** dan tempel di meja. Kalau butuh penjelasan lebih dalam, buka yang **Atlassian**.
+
+---
 
 ### Workflow harian
 
